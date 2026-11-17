@@ -1,0 +1,61 @@
+{
+  "format_version": 1,
+  "title": "雨港旧站",
+  "form": "short",
+  "constraints": "保留开放结局。",
+  "nodes": [
+    {
+      "id": "work",
+      "kind": "work",
+      "parent_id": null,
+      "title": "雨港旧站",
+      "summary": "林溪带着迟到的旧信回到雨港。",
+      "detail": "",
+      "goal": "",
+      "conflict": "",
+      "turn": "",
+      "start_state": "",
+      "end_state": "",
+      "archived": false,
+      "formal_episode_id": null,
+      "source_indices": []
+    },
+    {
+      "id": "episode",
+      "kind": "episode",
+      "parent_id": "work",
+      "title": "第一集 暴雨来信",
+      "summary": "",
+      "detail": "",
+      "goal": "",
+      "conflict": "",
+      "turn": "",
+      "start_state": "",
+      "end_state": "",
+      "archived": false,
+      "formal_episode_id": null,
+      "source_indices": []
+    },
+    {
+      "id": "scene",
+      "kind": "scene",
+      "parent_id": "episode",
+      "title": "候车亭的秘密",
+      "summary": "",
+      "detail": "",
+      "goal": "",
+      "conflict": "",
+      "turn": "",
+      "start_state": "",
+      "end_state": "",
+      "archived": false,
+      "formal_episode_id": null,
+      "source_indices": []
+    }
+  ],
+  "coverage": [],
+  "activity": [],
+  "characters": [],
+  "relations": [],
+  "clues": []
+}

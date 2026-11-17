@@ -1,0 +1,443 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "format_version": {
+      "const": 1
+    },
+    "title": {
+      "type": "string",
+      "maxLength": 200,
+      "minLength": 1
+    },
+    "form": {
+      "enum": [
+        "feature",
+        "series",
+        "short"
+      ]
+    },
+    "constraints": {
+      "type": "string",
+      "maxLength": 20000,
+      "minLength": 0
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1
+          },
+          "kind": {
+            "enum": [
+              "work",
+              "season",
+              "episode",
+              "sequence",
+              "scene"
+            ]
+          },
+          "parent_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 100,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1
+          },
+          "summary": {
+            "type": "string",
+            "maxLength": 4000,
+            "minLength": 0
+          },
+          "detail": {
+            "type": "string",
+            "maxLength": 100000,
+            "minLength": 0
+          },
+          "goal": {
+            "type": "string",
+            "maxLength": 4000,
+            "minLength": 0
+          },
+          "conflict": {
+            "type": "string",
+            "maxLength": 4000,
+            "minLength": 0
+          },
+          "turn": {
+            "type": "string",
+            "maxLength": 4000,
+            "minLength": 0
+          },
+          "start_state": {
+            "type": "string",
+            "maxLength": 4000,
+            "minLength": 0
+          },
+          "end_state": {
+            "type": "string",
+            "maxLength": 4000,
+            "minLength": 0
+          },
+          "archived": {
+            "type": "boolean"
+          },
+          "formal_episode_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 100,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "source_indices": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 99
+            },
+            "maxItems": 100
+          }
+        },
+        "required": [
+          "id",
+          "kind",
+          "parent_id",
+          "title",
+          "summary",
+          "detail",
+          "goal",
+          "conflict",
+          "turn",
+          "start_state",
+          "end_state",
+          "archived",
+          "formal_episode_id",
+          "source_indices"
+        ]
+      },
+      "maxItems": 2000
+    },
+    "coverage": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "source_index": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 99
+          },
+          "status": {
+            "enum": [
+              "unread",
+              "partial",
+              "read"
+            ]
+          },
+          "range": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 0
+          },
+          "notes": {
+            "type": "string",
+            "maxLength": 4000,
+            "minLength": 0
+          }
+        },
+        "required": [
+          "source_index",
+          "status",
+          "range",
+          "notes"
+        ]
+      },
+      "maxItems": 5000
+    },
+    "activity": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1
+          },
+          "node_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 100,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "origin": {
+            "enum": [
+              "agent",
+              "author_quote",
+              "external_record"
+            ]
+          },
+          "kind": {
+            "enum": [
+              "analysis",
+              "feedback",
+              "continuation",
+              "note"
+            ]
+          },
+          "text": {
+            "type": "string",
+            "maxLength": 20000,
+            "minLength": 0
+          }
+        },
+        "required": [
+          "id",
+          "node_id",
+          "origin",
+          "kind",
+          "text"
+        ]
+      },
+      "maxItems": 1000
+    },
+    "characters": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1
+          },
+          "summary": {
+            "type": "string",
+            "maxLength": 4000,
+            "minLength": 0
+          },
+          "arc": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "node_id": {
+                  "type": "string",
+                  "maxLength": 100,
+                  "minLength": 1
+                },
+                "state": {
+                  "type": "string",
+                  "maxLength": 4000,
+                  "minLength": 0
+                },
+                "choice": {
+                  "type": "string",
+                  "maxLength": 4000,
+                  "minLength": 0
+                },
+                "cost": {
+                  "type": "string",
+                  "maxLength": 4000,
+                  "minLength": 0
+                },
+                "knowledge": {
+                  "type": "string",
+                  "maxLength": 4000,
+                  "minLength": 0
+                }
+              },
+              "required": [
+                "node_id",
+                "state",
+                "choice",
+                "cost",
+                "knowledge"
+              ]
+            },
+            "maxItems": 1000
+          },
+          "archived": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "summary",
+          "arc",
+          "archived"
+        ]
+      },
+      "maxItems": 500
+    },
+    "relations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1
+          },
+          "from_id": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1
+          },
+          "to_id": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 4000,
+            "minLength": 0
+          },
+          "node_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "maxLength": 100,
+              "minLength": 1
+            },
+            "maxItems": 2000,
+            "uniqueItems": true
+          },
+          "archived": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "from_id",
+          "to_id",
+          "description",
+          "node_ids",
+          "archived"
+        ]
+      },
+      "maxItems": 1000
+    },
+    "clues": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1
+          },
+          "status": {
+            "enum": [
+              "open",
+              "resolved",
+              "abandoned"
+            ]
+          },
+          "placements": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "node_id": {
+                  "type": "string",
+                  "maxLength": 100,
+                  "minLength": 1
+                },
+                "stage": {
+                  "enum": [
+                    "plant",
+                    "develop",
+                    "payoff"
+                  ]
+                },
+                "notes": {
+                  "type": "string",
+                  "maxLength": 4000,
+                  "minLength": 0
+                }
+              },
+              "required": [
+                "node_id",
+                "stage",
+                "notes"
+              ]
+            },
+            "maxItems": 1000
+          },
+          "archived": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "status",
+          "placements",
+          "archived"
+        ]
+      },
+      "maxItems": 1000
+    }
+  },
+  "required": [
+    "format_version",
+    "title",
+    "form",
+    "constraints",
+    "nodes",
+    "coverage",
+    "activity",
+    "characters",
+    "relations",
+    "clues"
+  ]
+}

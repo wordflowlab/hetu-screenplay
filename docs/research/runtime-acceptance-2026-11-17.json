@@ -1,0 +1,105 @@
+{
+  "recorded_at": "2026-11-17",
+  "plugin_id": "org.wordflowlab.screenplay",
+  "version": "0.1.0",
+  "status": "local_acceptance_passed",
+  "package_sha256": "0293c96e06579aee4636a2f0283c8afbbcf5ff742e4e0f1fa1d5c009d8ca4361",
+  "platform": "macOS arm64",
+  "host_version": "0.10.0 development source",
+  "checks": {
+    "typecheck": "passed",
+    "unit_tests": {
+      "passed": 12
+    },
+    "python_media_tests": {
+      "applicable": false
+    },
+    "machine": {
+      "recorded_at": "2026-11-17T04:10:10.273Z",
+      "platform": "darwin",
+      "status": "passed",
+      "package_sha256": "0293c96e06579aee4636a2f0283c8afbbcf5ff742e4e0f1fa1d5c009d8ca4361",
+      "project_ref": {
+        "object_id": "ext_7b1bf643-aa8c-4047-9d28-0c74a193e476",
+        "revision": 13,
+        "sha256": "87e9a8aba6ead3a1a68c08186180dd18ff815eac7ba128a08f5fa6ae6256e371"
+      },
+      "actions": [
+        "skills.read",
+        "save_project",
+        "list_projects",
+        "get_project",
+        "upsert_node",
+        "move_node",
+        "archive_node",
+        "reorder_nodes",
+        "get_scope",
+        "add_note",
+        "set_network",
+        "map_episode",
+        "read_manuscript",
+        "fork_project",
+        "compare_versions",
+        "check_project",
+        "export_project",
+        "prepare_handoff",
+        "get_operation"
+      ],
+      "directory": "/var/folders/87/s6cpr7hd1_v43cs833x4s_900000gn/T/hetu-screenplay-cxuppP",
+      "boundaries": [
+        "真实稳定MCP与Core；桌面未启动",
+        "未执行付费生成、作者采纳、定稿或成片认可",
+        "Windows/Linux尚未实机验收"
+      ]
+    },
+    "electron": {
+      "passed": 2,
+      "checks": [
+        "real_electron_core",
+        "full_width",
+        "shared_gradient",
+        "18px_reading",
+        "all_topics",
+        "tree_keyboard",
+        "filter",
+        "edit",
+        "buffer_return_reopen",
+        "CAS_three_way_merge",
+        "author_feedback",
+        "native_atomic_export",
+        "trusted_handoff",
+        "light_dark",
+        "narrow",
+        "hot_disable"
+      ],
+      "first_use": "empty, cancel, focus trap, Escape, create and machine read-back",
+      "recovery": "remote update while closed, fixed original baseline, three-way merge"
+    },
+    "skill_validation": "passed",
+    "diagrams": {
+      "rendered": 4
+    },
+    "release_archive": {
+      "extracted_package_matches_runtime": true
+    }
+  },
+  "evidence_boundaries": [
+    "未执行付费模型生成；程序媒体验证工程与预演链路。",
+    "未代替作者进行正文采纳、定稿或成片认可。",
+    "Windows/Linux、干净系统、完整辅助技术与外部剪辑器导入未实机验收。",
+    "Codex原生Skill列表未注册同名插件；通过河图动态skills.read发现。"
+  ],
+  "source_files": {
+    "src/backend.ts": "2707d03bdd8a99d978deda9e8295467f793b50e06bffc2ca36b9052417c3c164",
+    "src/application/project.ts": "351922d45529869ed0779de204f3162a01cf8bdaac5bed04a3244b644fef9e45",
+    "src/domain/model.ts": "42aea317cdd28041fdd8029cf60d9a707369867409d82d7ef64c3e9b610b79ed",
+    "src/view/index.tsx": "78f38c679321bd0ae6a0bd4ac1f0578ef349e94e8570f9160e89d1c94e2bfbdc",
+    "src/view/style.css": "d12cdd92c09f93b66474a7b39b1940c8b49fa09754e5e5408718c2531abb77b8",
+    "contracts/plugin-manifest.json": "d728b050f51a57a1a64d9d405da6593d53fe0447768313dd7f4bbec34633ce6e",
+    "vendor/sources.json": "29e9e465c8899cb031fed7c323ce0122e4ecb82a87d8697185992eced6d77107"
+  },
+  "corrected_failures": [
+    "SDK传参、浏览器CSP下的校验初始化、恢复稿旧基线、窄窗目录遮挡修正后通过相关检查。",
+    "macOS tar首次归档携带AppleDouble，解压包摘要校验拒绝；禁用扩展属性后与运行验收包一致，首次包未发行。"
+  ]
+}

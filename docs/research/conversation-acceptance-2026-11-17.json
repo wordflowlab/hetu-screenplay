@@ -1,0 +1,59 @@
+{
+  "recorded_at": "2026-11-17",
+  "client": "codex",
+  "plugin_id": "org.wordflowlab.screenplay",
+  "package_sha256": "0293c96e06579aee4636a2f0283c8afbbcf5ff742e4e0f1fa1d5c009d8ca4361",
+  "status": "passed",
+  "entry": "本Codex对话既有MCP连接发现及读取Skill；本对话通过最新公开CLI推进，最后原MCP连接回读同一成果。",
+  "work_ref": {
+    "workspace_id": "workspace_8618d100-9ad0-4029-8328-51b37f571cc4",
+    "kind": "drama",
+    "object_id": "drama_9f36f2de-8c8f-408f-89da-4a13a3ec5eee"
+  },
+  "project_ref": {
+    "object_id": "ext_064eed56-b9b7-46d1-a515-607776354c5a",
+    "revision": 4,
+    "sha256": "128a8dcf4009c6b7dbb110a289afac797f1ce7ec54db0bea9bd04eb42d61f807"
+  },
+  "completed_steps": [
+    "drama-network",
+    "drama-core-project",
+    "drama-core-episode",
+    "drama-map",
+    "drama-read-before",
+    "drama-preview",
+    "drama-task",
+    "drama-open",
+    "drama-v1",
+    "drama-self-check",
+    "drama-v2",
+    "drama-submit",
+    "drama-read-after",
+    "drama-old-version",
+    "drama-new-version",
+    "drama-continuation",
+    "drama-get_scope",
+    "drama-check_project",
+    "drama-prepare_handoff",
+    "drama-export_project"
+  ],
+  "native_codex_skill_registration": false,
+  "mcp_final_readback": "succeeded",
+  "episodes_planned": 2,
+  "nodes": 5,
+  "fountain_versions": 2,
+  "old_and_new_content_readback": "exact bytes",
+  "author_state": "empty",
+  "candidate_count": 1,
+  "remaining_decision": "作者选择是否采纳、定稿；不由插件自动执行。",
+  "drama-v1": {
+    "sha256": "3b5fbffd178ec51db451d50209ef34d9dbbdf5bf97df5ac524d9ac4f90aeecfa",
+    "working_copy_id": "working_a5cd53cb-a124-428b-9d62-fa4500b7cf3a",
+    "working_revision_id": "wrev_16611d7a-de10-4900-8282-c51905cc03ac"
+  },
+  "drama-v2": {
+    "sha256": "24b2ddc31305135e139b1c89472a200b8a89789cf1cccad1177788e0cfde615c",
+    "working_copy_id": "working_a5cd53cb-a124-428b-9d62-fa4500b7cf3a",
+    "working_revision_id": "wrev_76ad1a05-8f65-43a9-8044-b95b3e9f441a"
+  }
+}

@@ -1,0 +1,1962 @@
+{
+ "manifest_version": 1,
+ "host_api": "1",
+ "id": "org.wordflowlab.screenplay",
+ "version": "0.1.0",
+ "display": {
+  "zh-CN": "剧本创作",
+  "en": "Screenplay"
+ },
+ "description": {
+  "zh-CN": "剧本创作、持续迭代与可恢复创作工程。",
+  "en": "Persistent creative projects with Agent workflows and review."
+ },
+ "license": "Apache-2.0",
+ "dependencies": [],
+ "runtime": {
+  "entry": "backend.mjs"
+ },
+ "contributions": {
+  "views": [
+   {
+    "id": "main",
+    "title": "剧本创作",
+    "entry": "index.html",
+    "object_kinds": [
+     "screenplay_project"
+    ],
+    "navigation": "integrated"
+   }
+  ],
+  "data": [
+   {
+    "kind": "screenplay_project",
+    "schema_version": "1.0.0",
+    "schema": {
+     "type": "object",
+     "additionalProperties": false,
+     "properties": {
+      "format_version": {
+       "const": 1
+      },
+      "title": {
+       "type": "string",
+       "maxLength": 200,
+       "minLength": 1
+      },
+      "form": {
+       "enum": [
+        "feature",
+        "series",
+        "short"
+       ]
+      },
+      "constraints": {
+       "type": "string",
+       "maxLength": 20000,
+       "minLength": 0
+      },
+      "nodes": {
+       "type": "array",
+       "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+         "id": {
+          "type": "string",
+          "maxLength": 100,
+          "minLength": 1
+         },
+         "kind": {
+          "enum": [
+           "work",
+           "season",
+           "episode",
+           "sequence",
+           "scene"
+          ]
+         },
+         "parent_id": {
+          "anyOf": [
+           {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "title": {
+          "type": "string",
+          "maxLength": 200,
+          "minLength": 1
+         },
+         "summary": {
+          "type": "string",
+          "maxLength": 4000,
+          "minLength": 0
+         },
+         "detail": {
+          "type": "string",
+          "maxLength": 100000,
+          "minLength": 0
+         },
+         "goal": {
+          "type": "string",
+          "maxLength": 4000,
+          "minLength": 0
+         },
+         "conflict": {
+          "type": "string",
+          "maxLength": 4000,
+          "minLength": 0
+         },
+         "turn": {
+          "type": "string",
+          "maxLength": 4000,
+          "minLength": 0
+         },
+         "start_state": {
+          "type": "string",
+          "maxLength": 4000,
+          "minLength": 0
+         },
+         "end_state": {
+          "type": "string",
+          "maxLength": 4000,
+          "minLength": 0
+         },
+         "archived": {
+          "type": "boolean"
+         },
+         "formal_episode_id": {
+          "anyOf": [
+           {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "source_indices": {
+          "type": "array",
+          "items": {
+           "type": "integer",
+           "minimum": 0,
+           "maximum": 99
+          },
+          "maxItems": 100
+         }
+        },
+        "required": [
+         "id",
+         "kind",
+         "parent_id",
+         "title",
+         "summary",
+         "detail",
+         "goal",
+         "conflict",
+         "turn",
+         "start_state",
+         "end_state",
+         "archived",
+         "formal_episode_id",
+         "source_indices"
+        ]
+       },
+       "maxItems": 2000
+      },
+      "coverage": {
+       "type": "array",
+       "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+         "source_index": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 99
+         },
+         "status": {
+          "enum": [
+           "unread",
+           "partial",
+           "read"
+          ]
+         },
+         "range": {
+          "type": "string",
+          "maxLength": 1000,
+          "minLength": 0
+         },
+         "notes": {
+          "type": "string",
+          "maxLength": 4000,
+          "minLength": 0
+         }
+        },
+        "required": [
+         "source_index",
+         "status",
+         "range",
+         "notes"
+        ]
+       },
+       "maxItems": 5000
+      },
+      "activity": {
+       "type": "array",
+       "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+         "id": {
+          "type": "string",
+          "maxLength": 100,
+          "minLength": 1
+         },
+         "node_id": {
+          "anyOf": [
+           {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "origin": {
+          "enum": [
+           "agent",
+           "author_quote",
+           "external_record"
+          ]
+         },
+         "kind": {
+          "enum": [
+           "analysis",
+           "feedback",
+           "continuation",
+           "note"
+          ]
+         },
+         "text": {
+          "type": "string",
+          "maxLength": 20000,
+          "minLength": 0
+         }
+        },
+        "required": [
+         "id",
+         "node_id",
+         "origin",
+         "kind",
+         "text"
+        ]
+       },
+       "maxItems": 1000
+      },
+      "characters": {
+       "type": "array",
+       "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+         "id": {
+          "type": "string",
+          "maxLength": 100,
+          "minLength": 1
+         },
+         "name": {
+          "type": "string",
+          "maxLength": 200,
+          "minLength": 1
+         },
+         "summary": {
+          "type": "string",
+          "maxLength": 4000,
+          "minLength": 0
+         },
+         "arc": {
+          "type": "array",
+          "items": {
+           "type": "object",
+           "additionalProperties": false,
+           "properties": {
+            "node_id": {
+             "type": "string",
+             "maxLength": 100,
+             "minLength": 1
+            },
+            "state": {
+             "type": "string",
+             "maxLength": 4000,
+             "minLength": 0
+            },
+            "choice": {
+             "type": "string",
+             "maxLength": 4000,
+             "minLength": 0
+            },
+            "cost": {
+             "type": "string",
+             "maxLength": 4000,
+             "minLength": 0
+            },
+            "knowledge": {
+             "type": "string",
+             "maxLength": 4000,
+             "minLength": 0
+            }
+           },
+           "required": [
+            "node_id",
+            "state",
+            "choice",
+            "cost",
+            "knowledge"
+           ]
+          },
+          "maxItems": 1000
+         },
+         "archived": {
+          "type": "boolean"
+         }
+        },
+        "required": [
+         "id",
+         "name",
+         "summary",
+         "arc",
+         "archived"
+        ]
+       },
+       "maxItems": 500
+      },
+      "relations": {
+       "type": "array",
+       "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+         "id": {
+          "type": "string",
+          "maxLength": 100,
+          "minLength": 1
+         },
+         "from_id": {
+          "type": "string",
+          "maxLength": 100,
+          "minLength": 1
+         },
+         "to_id": {
+          "type": "string",
+          "maxLength": 100,
+          "minLength": 1
+         },
+         "description": {
+          "type": "string",
+          "maxLength": 4000,
+          "minLength": 0
+         },
+         "node_ids": {
+          "type": "array",
+          "items": {
+           "type": "string",
+           "maxLength": 100,
+           "minLength": 1
+          },
+          "maxItems": 2000,
+          "uniqueItems": true
+         },
+         "archived": {
+          "type": "boolean"
+         }
+        },
+        "required": [
+         "id",
+         "from_id",
+         "to_id",
+         "description",
+         "node_ids",
+         "archived"
+        ]
+       },
+       "maxItems": 1000
+      },
+      "clues": {
+       "type": "array",
+       "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+         "id": {
+          "type": "string",
+          "maxLength": 100,
+          "minLength": 1
+         },
+         "title": {
+          "type": "string",
+          "maxLength": 200,
+          "minLength": 1
+         },
+         "status": {
+          "enum": [
+           "open",
+           "resolved",
+           "abandoned"
+          ]
+         },
+         "placements": {
+          "type": "array",
+          "items": {
+           "type": "object",
+           "additionalProperties": false,
+           "properties": {
+            "node_id": {
+             "type": "string",
+             "maxLength": 100,
+             "minLength": 1
+            },
+            "stage": {
+             "enum": [
+              "plant",
+              "develop",
+              "payoff"
+             ]
+            },
+            "notes": {
+             "type": "string",
+             "maxLength": 4000,
+             "minLength": 0
+            }
+           },
+           "required": [
+            "node_id",
+            "stage",
+            "notes"
+           ]
+          },
+          "maxItems": 1000
+         },
+         "archived": {
+          "type": "boolean"
+         }
+        },
+        "required": [
+         "id",
+         "title",
+         "status",
+         "placements",
+         "archived"
+        ]
+       },
+       "maxItems": 1000
+      }
+     },
+     "required": [
+      "format_version",
+      "title",
+      "form",
+      "constraints",
+      "nodes",
+      "coverage",
+      "activity",
+      "characters",
+      "relations",
+      "clues"
+     ]
+    }
+   }
+  ],
+  "actions": [
+   {
+    "id": "list_projects",
+    "title": "查找方案",
+    "effect": "read",
+    "input_schema": {
+     "type": "object",
+     "additionalProperties": false,
+     "properties": {
+      "query": {
+       "type": "string",
+       "maxLength": 1000,
+       "minLength": 0
+      },
+      "limit": {
+       "type": "integer",
+       "minimum": 1,
+       "maximum": 100
+      },
+      "cursor": {
+       "type": "string",
+       "maxLength": 4000,
+       "minLength": 0
+      }
+     },
+     "required": []
+    }
+   },
+   {
+    "id": "get_project",
+    "title": "读取固定方案",
+    "effect": "read",
+    "input_schema": {
+     "type": "object",
+     "additionalProperties": false,
+     "properties": {
+      "object_id": {
+       "type": "string",
+       "maxLength": 100,
+       "minLength": 1
+      },
+      "revision": {
+       "type": "integer",
+       "minimum": 1,
+       "maximum": 9007199254740991
+      },
+      "projection": {
+       "enum": [
+        "summary",
+        "full"
+       ]
+      }
+     },
+     "required": [
+      "object_id"
+     ]
+    }
+   },
+   {
+    "id": "get_scope",
+    "title": "读取节点与关联",
+    "effect": "read",
+    "input_schema": {
+     "type": "object",
+     "additionalProperties": false,
+     "properties": {
+      "object_id": {
+       "type": "string",
+       "maxLength": 100,
+       "minLength": 1
+      },
+      "revision": {
+       "type": "integer",
+       "minimum": 1,
+       "maximum": 9007199254740991
+      },
+      "node_id": {
+       "type": "string",
+       "maxLength": 100,
+       "minLength": 1
+      }
+     },
+     "required": [
+      "object_id",
+      "node_id"
+     ]
+    }
+   },
+   {
+    "id": "save_project",
+    "title": "保存完整方案",
+    "effect": "managed_write",
+    "input_schema": {
+     "type": "object",
+     "additionalProperties": false,
+     "properties": {
+      "object_id": {
+       "type": "string",
+       "maxLength": 100,
+       "minLength": 1
+      },
+      "expected_revision": {
+       "type": "integer",
+       "minimum": 0,
+       "maximum": 9007199254740991
+      },
+      "expected_sha256": {
+       "type": "string",
+       "pattern": "^([0-9a-f]{64})?$"
+      },
+      "operation_key": {
+       "type": "string",
+       "maxLength": 128,
+       "minLength": 1
+      },
+      "content": {
+       "type": "object",
+       "additionalProperties": false,
+       "properties": {
+        "format_version": {
+         "const": 1
+        },
+        "title": {
+         "type": "string",
+         "maxLength": 200,
+         "minLength": 1
+        },
+        "form": {
+         "enum": [
+          "feature",
+          "series",
+          "short"
+         ]
+        },
+        "constraints": {
+         "type": "string",
+         "maxLength": 20000,
+         "minLength": 0
+        },
+        "nodes": {
+         "type": "array",
+         "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+           "id": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1
+           },
+           "kind": {
+            "enum": [
+             "work",
+             "season",
+             "episode",
+             "sequence",
+             "scene"
+            ]
+           },
+           "parent_id": {
+            "anyOf": [
+             {
+              "type": "string",
+              "maxLength": 100,
+              "minLength": 1
+             },
+             {
+              "type": "null"
+             }
+            ]
+           },
+           "title": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1
+           },
+           "summary": {
+            "type": "string",
+            "maxLength": 4000,
+            "minLength": 0
+           },
+           "detail": {
+            "type": "string",
+            "maxLength": 100000,
+            "minLength": 0
+           },
+           "goal": {
+            "type": "string",
+            "maxLength": 4000,
+            "minLength": 0
+           },
+           "conflict": {
+            "type": "string",
+            "maxLength": 4000,
+            "minLength": 0
+           },
+           "turn": {
+            "type": "string",
+            "maxLength": 4000,
+            "minLength": 0
+           },
+           "start_state": {
+            "type": "string",
+            "maxLength": 4000,
+            "minLength": 0
+           },
+           "end_state": {
+            "type": "string",
+            "maxLength": 4000,
+            "minLength": 0
+           },
+           "archived": {
+            "type": "boolean"
+           },
+           "formal_episode_id": {
+            "anyOf": [
+             {
+              "type": "string",
+              "maxLength": 100,
+              "minLength": 1
+             },
+             {
+              "type": "null"
+             }
+            ]
+           },
+           "source_indices": {
+            "type": "array",
+            "items": {
+             "type": "integer",
+             "minimum": 0,
+             "maximum": 99
+            },
+            "maxItems": 100
+           }
+          },
+          "required": [
+           "id",
+           "kind",
+           "parent_id",
+           "title",
+           "summary",
+           "detail",
+           "goal",
+           "conflict",
+           "turn",
+           "start_state",
+           "end_state",
+           "archived",
+           "formal_episode_id",
+           "source_indices"
+          ]
+         },
+         "maxItems": 2000
+        },
+        "coverage": {
+         "type": "array",
+         "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+           "source_index": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 99
+           },
+           "status": {
+            "enum": [
+             "unread",
+             "partial",
+             "read"
+            ]
+           },
+           "range": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 0
+           },
+           "notes": {
+            "type": "string",
+            "maxLength": 4000,
+            "minLength": 0
+           }
+          },
+          "required": [
+           "source_index",
+           "status",
+           "range",
+           "notes"
+          ]
+         },
+         "maxItems": 5000
+        },
+        "activity": {
+         "type": "array",
+         "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+           "id": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1
+           },
+           "node_id": {
+            "anyOf": [
+             {
+              "type": "string",
+              "maxLength": 100,
+              "minLength": 1
+             },
+             {
+              "type": "null"
+             }
+            ]
+           },
+           "origin": {
+            "enum": [
+             "agent",
+             "author_quote",
+             "external_record"
+            ]
+           },
+           "kind": {
+            "enum": [
+             "analysis",
+             "feedback",
+             "continuation",
+             "note"
+            ]
+           },
+           "text": {
+            "type": "string",
+            "maxLength": 20000,
+            "minLength": 0
+           }
+          },
+          "required": [
+           "id",
+           "node_id",
+           "origin",
+           "kind",
+           "text"
+          ]
+         },
+         "maxItems": 1000
+        },
+        "characters": {
+         "type": "array",
+         "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+           "id": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1
+           },
+           "name": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1
+           },
+           "summary": {
+            "type": "string",
+            "maxLength": 4000,
+            "minLength": 0
+           },
+           "arc": {
+            "type": "array",
+            "items": {
+             "type": "object",
+             "additionalProperties": false,
+             "properties": {
+              "node_id": {
+               "type": "string",
+               "maxLength": 100,
+               "minLength": 1
+              },
+              "state": {
+               "type": "string",
+               "maxLength": 4000,
+               "minLength": 0
+              },
+              "choice": {
+               "type": "string",
+               "maxLength": 4000,
+               "minLength": 0
+              },
+              "cost": {
+               "type": "string",
+               "maxLength": 4000,
+               "minLength": 0
+              },
+              "knowledge": {
+               "type": "string",
+               "maxLength": 4000,
+               "minLength": 0
+              }
+             },
+             "required": [
+              "node_id",
+              "state",
+              "choice",
+              "cost",
+              "knowledge"
+             ]
+            },
+            "maxItems": 1000
+           },
+           "archived": {
+            "type": "boolean"
+           }
+          },
+          "required": [
+           "id",
+           "name",
+           "summary",
+           "arc",
+           "archived"
+          ]
+         },
+         "maxItems": 500
+        },
+        "relations": {
+         "type": "array",
+         "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+           "id": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1
+           },
+           "from_id": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1
+           },
+           "to_id": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1
+           },
+           "description": {
+            "type": "string",
+            "maxLength": 4000,
+            "minLength": 0
+           },
+           "node_ids": {
+            "type": "array",
+            "items": {
+             "type": "string",
+             "maxLength": 100,
+             "minLength": 1
+            },
+            "maxItems": 2000,
+            "uniqueItems": true
+           },
+           "archived": {
+            "type": "boolean"
+           }
+          },
+          "required": [
+           "id",
+           "from_id",
+           "to_id",
+           "description",
+           "node_ids",
+           "archived"
+          ]
+         },
+         "maxItems": 1000
+        },
+        "clues": {
+         "type": "array",
+         "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+           "id": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1
+           },
+           "title": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1
+           },
+           "status": {
+            "enum": [
+             "open",
+             "resolved",
+             "abandoned"
+            ]
+           },
+           "placements": {
+            "type": "array",
+            "items": {
+             "type": "object",
+             "additionalProperties": false,
+             "properties": {
+              "node_id": {
+               "type": "string",
+               "maxLength": 100,
+               "minLength": 1
+              },
+              "stage": {
+               "enum": [
+                "plant",
+                "develop",
+                "payoff"
+               ]
+              },
+              "notes": {
+               "type": "string",
+               "maxLength": 4000,
+               "minLength": 0
+              }
+             },
+             "required": [
+              "node_id",
+              "stage",
+              "notes"
+             ]
+            },
+            "maxItems": 1000
+           },
+           "archived": {
+            "type": "boolean"
+           }
+          },
+          "required": [
+           "id",
+           "title",
+           "status",
+           "placements",
+           "archived"
+          ]
+         },
+         "maxItems": 1000
+        }
+       },
+       "required": [
+        "format_version",
+        "title",
+        "form",
+        "constraints",
+        "nodes",
+        "coverage",
+        "activity",
+        "characters",
+        "relations",
+        "clues"
+       ]
+      },
+      "source_refs": {
+       "type": "array",
+       "items": {
+        "type": "object"
+       },
+       "maxItems": 100
+      }
+     },
+     "required": [
+      "expected_revision",
+      "expected_sha256",
+      "operation_key",
+      "content",
+      "source_refs"
+     ]
+    }
+   },
+   {
+    "id": "upsert_node",
+    "title": "创建或更新节点",
+    "effect": "managed_write",
+    "input_schema": {
+     "type": "object",
+     "additionalProperties": false,
+     "properties": {
+      "object_id": {
+       "type": "string",
+       "maxLength": 100,
+       "minLength": 1
+      },
+      "expected_revision": {
+       "type": "integer",
+       "minimum": 0,
+       "maximum": 9007199254740991
+      },
+      "expected_sha256": {
+       "type": "string",
+       "pattern": "^([0-9a-f]{64})?$"
+      },
+      "operation_key": {
+       "type": "string",
+       "maxLength": 128,
+       "minLength": 1
+      },
+      "node": {
+       "type": "object",
+       "additionalProperties": false,
+       "properties": {
+        "id": {
+         "type": "string",
+         "maxLength": 100,
+         "minLength": 1
+        },
+        "kind": {
+         "enum": [
+          "work",
+          "season",
+          "episode",
+          "sequence",
+          "scene"
+         ]
+        },
+        "parent_id": {
+         "anyOf": [
+          {
+           "type": "string",
+           "maxLength": 100,
+           "minLength": 1
+          },
+          {
+           "type": "null"
+          }
+         ]
+        },
+        "title": {
+         "type": "string",
+         "maxLength": 200,
+         "minLength": 1
+        },
+        "summary": {
+         "type": "string",
+         "maxLength": 4000,
+         "minLength": 0
+        },
+        "detail": {
+         "type": "string",
+         "maxLength": 100000,
+         "minLength": 0
+        },
+        "goal": {
+         "type": "string",
+         "maxLength": 4000,
+         "minLength": 0
+        },
+        "conflict": {
+         "type": "string",
+         "maxLength": 4000,
+         "minLength": 0
+        },
+        "turn": {
+         "type": "string",
+         "maxLength": 4000,
+         "minLength": 0
+        },
+        "start_state": {
+         "type": "string",
+         "maxLength": 4000,
+         "minLength": 0
+        },
+        "end_state": {
+         "type": "string",
+         "maxLength": 4000,
+         "minLength": 0
+        },
+        "archived": {
+         "type": "boolean"
+        },
+        "formal_episode_id": {
+         "anyOf": [
+          {
+           "type": "string",
+           "maxLength": 100,
+           "minLength": 1
+          },
+          {
+           "type": "null"
+          }
+         ]
+        },
+        "source_indices": {
+         "type": "array",
+         "items": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 99
+         },
+         "maxItems": 100
+        }
+       },
+       "required": [
+        "id",
+        "kind",
+        "parent_id",
+        "title",
+        "summary",
+        "detail",
+        "goal",
+        "conflict",
+        "turn",
+        "start_state",
+        "end_state",
+        "archived",
+        "formal_episode_id",
+        "source_indices"
+       ]
+      },
+      "position": {
+       "type": "integer",
+       "minimum": 0,
+       "maximum": 2000
+      }
+     },
+     "required": [
+      "object_id",
+      "expected_revision",
+      "expected_sha256",
+      "operation_key",
+      "node"
+     ]
+    }
+   },
+   {
+    "id": "move_node",
+    "title": "移动节点",
+    "effect": "managed_write",
+    "input_schema": {
+     "type": "object",
+     "additionalProperties": false,
+     "properties": {
+      "object_id": {
+       "type": "string",
+       "maxLength": 100,
+       "minLength": 1
+      },
+      "expected_revision": {
+       "type": "integer",
+       "minimum": 0,
+       "maximum": 9007199254740991
+      },
+      "expected_sha256": {
+       "type": "string",
+       "pattern": "^([0-9a-f]{64})?$"
+      },
+      "operation_key": {
+       "type": "string",
+       "maxLength": 128,
+       "minLength": 1
+      },
+      "node_id": {
+       "type": "string",
+       "maxLength": 100,
+       "minLength": 1
+      },
+      "parent_id": {
+       "type": "string",
+       "maxLength": 100,
+       "minLength": 1
+      },
+      "position": {
+       "type": "integer",
+       "minimum": 0,
+       "maximum": 2000
+      }
+     },
+     "required": [
+      "object_id",
+      "expected_revision",
+      "expected_sha256",
+      "operation_key",
+      "node_id",
+      "parent_id"
+     ]
+    }
+   },
+   {
+    "id": "archive_node",
+    "title": "归档或恢复节点",
+    "effect": "managed_write",
+    "input_schema": {
+     "type": "object",
+     "additionalProperties": false,
+     "properties": {
+      "object_id": {
+       "type": "string",
+       "maxLength": 100,
+       "minLength": 1
+      },
+      "expected_revision": {
+       "type": "integer",
+       "minimum": 0,
+       "maximum": 9007199254740991
+      },
+      "expected_sha256": {
+       "type": "string",
+       "pattern": "^([0-9a-f]{64})?$"
+      },
+      "operation_key": {
+       "type": "string",
+       "maxLength": 128,
+       "minLength": 1
+      },
+      "node_id": {
+       "type": "string",
+       "maxLength": 100,
+       "minLength": 1
+      },
+      "archived": {
+       "type": "boolean"
+      }
+     },
+     "required": [
+      "object_id",
+      "expected_revision",
+      "expected_sha256",
+      "operation_key",
+      "node_id",
+      "archived"
+     ]
+    }
+   },
+   {
+    "id": "reorder_nodes",
+    "title": "重排兄弟节点",
+    "effect": "managed_write",
+    "input_schema": {
+     "type": "object",
+     "additionalProperties": false,
+     "properties": {
+      "object_id": {
+       "type": "string",
+       "maxLength": 100,
+       "minLength": 1
+      },
+      "expected_revision": {
+       "type": "integer",
+       "minimum": 0,
+       "maximum": 9007199254740991
+      },
+      "expected_sha256": {
+       "type": "string",
+       "pattern": "^([0-9a-f]{64})?$"
+      },
+      "operation_key": {
+       "type": "string",
+       "maxLength": 128,
+       "minLength": 1
+      },
+      "parent_id": {
+       "type": "string",
+       "maxLength": 100,
+       "minLength": 1
+      },
+      "node_ids": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "maxLength": 100,
+        "minLength": 1
+       },
+       "maxItems": 2000,
+       "uniqueItems": true
+      }
+     },
+     "required": [
+      "object_id",
+      "expected_revision",
+      "expected_sha256",
+      "operation_key",
+      "parent_id",
+      "node_ids"
+     ]
+    }
+   },
+   {
+    "id": "fork_project",
+    "title": "建立备选方案",
+    "effect": "managed_write",
+    "input_schema": {
+     "type": "object",
+     "additionalProperties": false,
+     "properties": {
+      "object_id": {
+       "type": "string",
+       "maxLength": 100,
+       "minLength": 1
+      },
+      "revision": {
+       "type": "integer",
+       "minimum": 1,
+       "maximum": 9007199254740991
+      },
+      "title": {
+       "type": "string",
+       "maxLength": 200,
+       "minLength": 1
+      },
+      "operation_key": {
+       "type": "string",
+       "maxLength": 128,
+       "minLength": 1
+      }
+     },
+     "required": [
+      "object_id",
+      "revision",
+      "title",
+      "operation_key"
+     ]
+    }
+   },
+   {
+    "id": "compare_versions",
+    "title": "比较固定版本",
+    "effect": "read",
+    "input_schema": {
+     "type": "object",
+     "additionalProperties": false,
+     "properties": {
+      "object_id": {
+       "type": "string",
+       "maxLength": 100,
+       "minLength": 1
+      },
+      "from_revision": {
+       "type": "integer",
+       "minimum": 1,
+       "maximum": 9007199254740991
+      },
+      "to_revision": {
+       "type": "integer",
+       "minimum": 1,
+       "maximum": 9007199254740991
+      }
+     },
+     "required": [
+      "object_id",
+      "from_revision",
+      "to_revision"
+     ]
+    }
+   },
+   {
+    "id": "check_project",
+    "title": "检查完整性",
+    "effect": "read",
+    "input_schema": {
+     "type": "object",
+     "additionalProperties": false,
+     "properties": {
+      "object_id": {
+       "type": "string",
+       "maxLength": 100,
+       "minLength": 1
+      },
+      "revision": {
+       "type": "integer",
+       "minimum": 1,
+       "maximum": 9007199254740991
+      }
+     },
+     "required": [
+      "object_id"
+     ]
+    }
+   },
+   {
+    "id": "export_project",
+    "title": "导出固定方案",
+    "effect": "read",
+    "input_schema": {
+     "type": "object",
+     "additionalProperties": false,
+     "properties": {
+      "object_id": {
+       "type": "string",
+       "maxLength": 100,
+       "minLength": 1
+      },
+      "revision": {
+       "type": "integer",
+       "minimum": 1,
+       "maximum": 9007199254740991
+      },
+      "format": {
+       "enum": [
+        "json",
+        "markdown"
+       ]
+      },
+      "offset": {
+       "type": "integer",
+       "minimum": 0,
+       "maximum": 9007199254740991
+      },
+      "max_bytes": {
+       "type": "integer",
+       "minimum": 256,
+       "maximum": 48000
+      }
+     },
+     "required": [
+      "object_id",
+      "revision",
+      "format"
+     ]
+    }
+   },
+   {
+    "id": "prepare_handoff",
+    "title": "准备精确AI交接",
+    "effect": "read",
+    "input_schema": {
+     "type": "object",
+     "additionalProperties": false,
+     "properties": {
+      "object_id": {
+       "type": "string",
+       "maxLength": 100,
+       "minLength": 1
+      },
+      "revision": {
+       "type": "integer",
+       "minimum": 1,
+       "maximum": 9007199254740991
+      },
+      "node_id": {
+       "type": "string",
+       "maxLength": 100,
+       "minLength": 1
+      },
+      "goal": {
+       "type": "string",
+       "maxLength": 10000,
+       "minLength": 1
+      }
+     },
+     "required": [
+      "object_id",
+      "revision",
+      "node_id",
+      "goal"
+     ]
+    }
+   },
+   {
+    "id": "get_operation",
+    "title": "回读原操作",
+    "effect": "read",
+    "input_schema": {
+     "type": "object",
+     "additionalProperties": false,
+     "properties": {
+      "operation_key": {
+       "type": "string",
+       "maxLength": 128,
+       "minLength": 1
+      }
+     },
+     "required": [
+      "operation_key"
+     ]
+    }
+   },
+   {
+    "id": "add_note",
+    "title": "追加意见或接续记录",
+    "effect": "managed_write",
+    "input_schema": {
+     "type": "object",
+     "additionalProperties": false,
+     "properties": {
+      "object_id": {
+       "type": "string",
+       "maxLength": 100,
+       "minLength": 1
+      },
+      "expected_revision": {
+       "type": "integer",
+       "minimum": 0,
+       "maximum": 9007199254740991
+      },
+      "expected_sha256": {
+       "type": "string",
+       "pattern": "^([0-9a-f]{64})?$"
+      },
+      "operation_key": {
+       "type": "string",
+       "maxLength": 128,
+       "minLength": 1
+      },
+      "note": {
+       "type": "object",
+       "additionalProperties": false,
+       "properties": {
+        "id": {
+         "type": "string",
+         "maxLength": 100,
+         "minLength": 1
+        },
+        "node_id": {
+         "anyOf": [
+          {
+           "type": "string",
+           "maxLength": 100,
+           "minLength": 1
+          },
+          {
+           "type": "null"
+          }
+         ]
+        },
+        "origin": {
+         "enum": [
+          "agent",
+          "author_quote",
+          "external_record"
+         ]
+        },
+        "kind": {
+         "enum": [
+          "analysis",
+          "feedback",
+          "continuation",
+          "note"
+         ]
+        },
+        "text": {
+         "type": "string",
+         "maxLength": 20000,
+         "minLength": 0
+        }
+       },
+       "required": [
+        "id",
+        "node_id",
+        "origin",
+        "kind",
+        "text"
+       ]
+      }
+     },
+     "required": [
+      "object_id",
+      "expected_revision",
+      "expected_sha256",
+      "operation_key",
+      "note"
+     ]
+    }
+   },
+   {
+    "id": "set_network",
+    "title": "保存人物关系与伏笔",
+    "effect": "managed_write",
+    "input_schema": {
+     "type": "object",
+     "additionalProperties": false,
+     "properties": {
+      "object_id": {
+       "type": "string",
+       "maxLength": 100,
+       "minLength": 1
+      },
+      "expected_revision": {
+       "type": "integer",
+       "minimum": 0,
+       "maximum": 9007199254740991
+      },
+      "expected_sha256": {
+       "type": "string",
+       "pattern": "^([0-9a-f]{64})?$"
+      },
+      "operation_key": {
+       "type": "string",
+       "maxLength": 128,
+       "minLength": 1
+      },
+      "characters": {
+       "type": "array",
+       "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+         "id": {
+          "type": "string",
+          "maxLength": 100,
+          "minLength": 1
+         },
+         "name": {
+          "type": "string",
+          "maxLength": 200,
+          "minLength": 1
+         },
+         "summary": {
+          "type": "string",
+          "maxLength": 4000,
+          "minLength": 0
+         },
+         "arc": {
+          "type": "array",
+          "items": {
+           "type": "object",
+           "additionalProperties": false,
+           "properties": {
+            "node_id": {
+             "type": "string",
+             "maxLength": 100,
+             "minLength": 1
+            },
+            "state": {
+             "type": "string",
+             "maxLength": 4000,
+             "minLength": 0
+            },
+            "choice": {
+             "type": "string",
+             "maxLength": 4000,
+             "minLength": 0
+            },
+            "cost": {
+             "type": "string",
+             "maxLength": 4000,
+             "minLength": 0
+            },
+            "knowledge": {
+             "type": "string",
+             "maxLength": 4000,
+             "minLength": 0
+            }
+           },
+           "required": [
+            "node_id",
+            "state",
+            "choice",
+            "cost",
+            "knowledge"
+           ]
+          },
+          "maxItems": 1000
+         },
+         "archived": {
+          "type": "boolean"
+         }
+        },
+        "required": [
+         "id",
+         "name",
+         "summary",
+         "arc",
+         "archived"
+        ]
+       },
+       "maxItems": 500
+      },
+      "relations": {
+       "type": "array",
+       "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+         "id": {
+          "type": "string",
+          "maxLength": 100,
+          "minLength": 1
+         },
+         "from_id": {
+          "type": "string",
+          "maxLength": 100,
+          "minLength": 1
+         },
+         "to_id": {
+          "type": "string",
+          "maxLength": 100,
+          "minLength": 1
+         },
+         "description": {
+          "type": "string",
+          "maxLength": 4000,
+          "minLength": 0
+         },
+         "node_ids": {
+          "type": "array",
+          "items": {
+           "type": "string",
+           "maxLength": 100,
+           "minLength": 1
+          },
+          "maxItems": 2000,
+          "uniqueItems": true
+         },
+         "archived": {
+          "type": "boolean"
+         }
+        },
+        "required": [
+         "id",
+         "from_id",
+         "to_id",
+         "description",
+         "node_ids",
+         "archived"
+        ]
+       },
+       "maxItems": 1000
+      },
+      "clues": {
+       "type": "array",
+       "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+         "id": {
+          "type": "string",
+          "maxLength": 100,
+          "minLength": 1
+         },
+         "title": {
+          "type": "string",
+          "maxLength": 200,
+          "minLength": 1
+         },
+         "status": {
+          "enum": [
+           "open",
+           "resolved",
+           "abandoned"
+          ]
+         },
+         "placements": {
+          "type": "array",
+          "items": {
+           "type": "object",
+           "additionalProperties": false,
+           "properties": {
+            "node_id": {
+             "type": "string",
+             "maxLength": 100,
+             "minLength": 1
+            },
+            "stage": {
+             "enum": [
+              "plant",
+              "develop",
+              "payoff"
+             ]
+            },
+            "notes": {
+             "type": "string",
+             "maxLength": 4000,
+             "minLength": 0
+            }
+           },
+           "required": [
+            "node_id",
+            "stage",
+            "notes"
+           ]
+          },
+          "maxItems": 1000
+         },
+         "archived": {
+          "type": "boolean"
+         }
+        },
+        "required": [
+         "id",
+         "title",
+         "status",
+         "placements",
+         "archived"
+        ]
+       },
+       "maxItems": 1000
+      }
+     },
+     "required": [
+      "object_id",
+      "expected_revision",
+      "expected_sha256",
+      "operation_key",
+      "characters",
+      "relations",
+      "clues"
+     ]
+    }
+   },
+   {
+    "id": "map_episode",
+    "title": "关联正式写作分集",
+    "effect": "managed_write",
+    "input_schema": {
+     "type": "object",
+     "additionalProperties": false,
+     "properties": {
+      "object_id": {
+       "type": "string",
+       "maxLength": 100,
+       "minLength": 1
+      },
+      "expected_revision": {
+       "type": "integer",
+       "minimum": 0,
+       "maximum": 9007199254740991
+      },
+      "expected_sha256": {
+       "type": "string",
+       "pattern": "^([0-9a-f]{64})?$"
+      },
+      "operation_key": {
+       "type": "string",
+       "maxLength": 128,
+       "minLength": 1
+      },
+      "node_id": {
+       "type": "string",
+       "maxLength": 100,
+       "minLength": 1
+      },
+      "episode_id": {
+       "type": "string",
+       "maxLength": 100,
+       "minLength": 1
+      }
+     },
+     "required": [
+      "object_id",
+      "expected_revision",
+      "expected_sha256",
+      "operation_key",
+      "node_id",
+      "episode_id"
+     ]
+    }
+   },
+   {
+    "id": "read_manuscript",
+    "title": "回读实际分集正文",
+    "effect": "read",
+    "input_schema": {
+     "type": "object",
+     "additionalProperties": false,
+     "properties": {
+      "object_id": {
+       "type": "string",
+       "maxLength": 100,
+       "minLength": 1
+      },
+      "revision": {
+       "type": "integer",
+       "minimum": 1,
+       "maximum": 9007199254740991
+      },
+      "node_id": {
+       "type": "string",
+       "maxLength": 100,
+       "minLength": 1
+      }
+     },
+     "required": [
+      "object_id",
+      "node_id"
+     ]
+    }
+   }
+  ],
+  "skills": [
+   {
+    "id": "screenplay",
+    "name": "hetu-screenplay",
+    "description": "在河图中推进剧本创作、固定成果、局部返工和工程交付。",
+    "entry": "skills/hetu-screenplay/SKILL.md"
+   }
+  ]
+ }
+}

@@ -1,0 +1,30 @@
+{
+  "source_repository": "https://github.com/limecloud/hetu",
+  "revision": "80f2de7f4680de59b93eb95b61026eb750e505cb",
+  "worktree": "local SDK and stylesheet snapshots; digests identify exact bytes",
+  "files": [
+    {
+      "file": "hetu-sdk.ts",
+      "sha256": "b43d512b686b46d4310fb2ede1f4e80e716ae6c8ec0e6ba92f2bd5282857ed30"
+    },
+    {
+      "file": "project-store.ts",
+      "sha256": "1dcce9ac7169c4d7d31b70b462057db4aa58db0b34408113b0c79660a1687fed"
+    },
+    {
+      "file": "radix-workbench.css",
+      "sha256": "ccf9f4d25676a4225180128d05a3d0a9d26e92fa832fdccb7d80c4d52ee4b625"
+    },
+    {
+      "file": "radix-colors-MIT.txt",
+      "sha256": "9c400881b9139571aa7acc3bd6e422a4f05223b4519169fb661298fb44bf228e"
+    },
+    {
+      "file": "hetu-LICENSE",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    }
+  ],
+  "transformations": {
+    "project-store.ts": "仅将type import从./index.ts改为./hetu-sdk.ts，其余字节来自宿主。"
+  }
+}
